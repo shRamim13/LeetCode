@@ -1,6 +1,3 @@
-public class Remove_Nth_Node_From_End of_List {
-    
-}
 /**
  * Definition for singly-linked list.
  * public class ListNode {
