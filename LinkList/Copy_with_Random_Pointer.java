@@ -10,6 +10,7 @@ public Node copyRandomList(Node head) {
             cur = copy.next;
         }
 
+        
         // Step 2: Assign random pointers for the copied nodes
         cur = head;
         while(cur!=null){
