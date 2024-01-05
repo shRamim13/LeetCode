@@ -22,7 +22,7 @@ public:
             return false;
         }
         else{
-            int last_val=v.back();  
+            int last_val=v.back();  //v[v.size()-1];
             v[mp[val]]=last_val;
             v.pop_back();
             mp[last_val]=mp[val];
