@@ -3,7 +3,6 @@ public:
    vector<int>v;
    unordered_map<int,int>mp;
     RandomizedSet() {
-        
     }
     
     bool insert(int val) {
