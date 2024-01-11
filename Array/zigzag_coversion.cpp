@@ -30,7 +30,6 @@ public:
         for (auto k : v)
         {
             ans += k;
-            
         }
         return ans;
     }
