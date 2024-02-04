@@ -1,3 +1,4 @@
+# define ssd
 class Solution {
 public:
 
