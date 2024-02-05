@@ -39,7 +39,7 @@ int main()
         nums.push_back(x);
     }
 
-    sort(nums.begin(), nums.end()); // Sort for unique permutations
+    sort(nums.begin(), nums.end());
 
     vector<int> v;
     vector<vector<int>> ans;
