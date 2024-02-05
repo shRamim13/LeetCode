@@ -1,7 +1,9 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm> // for sort
 using namespace std;
 
-void permutation(int indx, vector<int> freq, vector<int> nums, vector<int> v, vector<vector<int>> ans)
+void permutation(vector<int> &freq, vector<int> &nums, vector<int> &v, vector<vector<int>> &ans)
 {
     if (v.size() == nums.size())
     {
@@ -14,9 +16,13 @@ void permutation(int indx, vector<int> freq, vector<int> nums, vector<int> v, ve
         {
             v.push_back(nums[i]);
             freq[i] = 1;
-            permutation(i, freq, nums, v, ans);
+            permutation(freq, nums, v, ans);
             v.pop_back();
             freq[i] = 0;
+
+            // Skip duplicate elements
+            // while (i + 1 < nums.size() && nums[i] == nums[i + 1])
+            //     i++;
         }
     }
 }
@@ -28,13 +34,18 @@ int main()
     cin >> n;
     for (int i = 0; i < n; i++)
     {
-        int x ;
-         nums.push_back(x);
+        int x;
+        cin >> x;
+        nums.push_back(x);
     }
+
+    sort(nums.begin(), nums.end()); // Sort for unique permutations
+
     vector<int> v;
     vector<vector<int>> ans;
     vector<int> freq(n, 0);
-    permutation(0, freq, nums, v, ans);
+    permutation(freq, nums, v, ans);
+
     for (auto x : ans)
     {
         for (auto y : x)
@@ -43,5 +54,6 @@ int main()
         }
         cout << endl;
     }
+
     return 0;
 }
