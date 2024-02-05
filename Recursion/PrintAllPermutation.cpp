@@ -1,5 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
+
+void permutation(int indx, vector<int> nums, vector<int> v, vector<vector<int>> ans)
+{
+}
 int main()
 {
     int n;
