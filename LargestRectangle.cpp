@@ -24,12 +24,12 @@ int largestRectangleArea(vector<int> &heights)
         s1.push(i);
     }
 
-    cout << "Previous Minimum -> " << endl;
-    for (int i = 0; i < n; i++)
-    {
-        cout << prev_min[i] << " ";
-    }
-    cout << endl;
+    // cout << "Previous Minimum -> " << endl;
+    // for (int i = 0; i < n; i++)
+    // {
+    //     cout << prev_min[i] << " ";
+    // }
+    // cout << endl;
 
     for (int i = n - 1; i >= 0; i--)
     {
@@ -48,20 +48,20 @@ int largestRectangleArea(vector<int> &heights)
         s2.push(i);
     }
 
-    cout << "Next Minimum -> " << endl;
+    // cout << "Next Minimum -> " << endl;
     
-    for (int i = 0; i < n; i++)
-    {
-        cout << next_min[i] << " ";
-    }
-    cout << endl;
+    // for (int i = 0; i < n; i++)
+    // {
+    //     cout << next_min[i] << " ";
+    // }
+    // cout << endl;
 
     int maxArea = INT_MIN;
 
     for (int i = 0; i < n; i++)
     {
         int temp = (next_min[i] - prev_min[i] - 1) * heights[i];
-        cout << next_min[i] << " " << prev_min[i] << " " << heights[i] << " " << temp << endl;
+    //    cout << next_min[i] << " " << prev_min[i] << " " << heights[i] << " " << temp << endl;
         maxArea = max(temp, maxArea);
     }
 
