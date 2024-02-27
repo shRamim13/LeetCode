@@ -1,14 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int lower_bound(vector<int> &v, int s)
+int upper_bound(vector<int> &v, int s)
 {
     int l = 0, r = v.size() - 1;
     int ans = r + 1;
     while (l <= r)
     {
         int mid = (l + r) / 2;
-        if (v[mid] >= s)
+        if (v[mid] > s)
         {
             ans = mid;
             r = mid - 1;
@@ -32,8 +32,8 @@ int main()
         v.push_back(x);
     }
     sort(v.begin(), v.end());
-    int val = lower_bound(v, s);
-    cout << "Lower Bound is at " << val << " th index"
+    int val = upper_bound(v, s);
+    cout << "Upper Bound is at " << val << " th index"
          << " and the value is "
          << v[val];
     return 0;
