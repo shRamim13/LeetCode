@@ -14,7 +14,7 @@ public:
         {
             s += string(maxheap.top().first, maxheap.top().second);
             maxheap.pop();
-        }
+    
         return s;
     }
 };
