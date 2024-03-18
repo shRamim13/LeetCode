@@ -44,7 +44,10 @@ void levelOrderTravarsal(node *root)
         if (temp == NULL)
         {
             cout << "\n";
-            q.push(NULL);
+            if (!q.empty())
+            {
+                q.push(NULL);
+            }
         }
         else
         {
@@ -55,16 +58,61 @@ void levelOrderTravarsal(node *root)
             }
             if (temp->right)
             {
-                q.push(temp->right)
+                q.push(temp->right);
             }
         }
     }
+}
+
+void InOrderTraversal(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    InOrderTraversal(root->left);
+    cout << root->data << " ";
+    InOrderTraversal(root->right);
+}
+
+void PreOrderTraversal(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    cout << root->data << " ";
+    PreOrderTraversal(root->left);
+    PreOrderTraversal(root->right);
+}
+
+void PostOrderTraversal(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    PostOrderTraversal(root->left);
+    PostOrderTraversal(root->right);
+    cout << root->data << " ";
 }
 
 int main()
 {
     node *root = NULL;
     root = builTree(root);
-
+    cout << "LevelOrder Travarsal \n";
     levelOrderTravarsal(root);
+
+    cout << "InOrder Travarsal ";
+    InOrderTraversal(root);
+    cout << "\n";
+    cout << "PreOrder Travarsal ";
+    PreOrderTraversal(root);
+    cout << "\n";
+    cout << "PostOrder Travarsal ";
+    PostOrderTraversal(root);
 }
+/*
+1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
+*/
