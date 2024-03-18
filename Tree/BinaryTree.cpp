@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <queue>
 using namespace std;
 
 class node
@@ -20,11 +21,11 @@ node *builTree(node *root)
     cout << "Enter the data " << endl;
     int data;
     cin >> data;
-    root = new node(data);
     if (data == -1)
     {
         return NULL;
     }
+    root = new node(data);
     cout << "Enter data for inserting the left of " << data << endl;
     root->left = builTree(root->left);
     cout << "Enter data for inserting the right of " << data << endl;
@@ -97,22 +98,72 @@ void PostOrderTraversal(node *root)
     cout << root->data << " ";
 }
 
+node *buildFromLevelOrder()
+{
+    queue<node *> q;
+    cout << "Enter data for the root \n";
+    int data;
+    cin >> data;
+    if (data == -1)
+    {
+        return NULL;
+    }
+    node *root = new node(data);
+    q.push(root);
+    while (!q.empty())
+    {
+        node *temp = q.front();
+        q.pop();
+        cout << "Enter left node for " << temp->data << endl;
+        int leftData;
+        cin >> leftData;
+        if (leftData != -1)
+        {
+            temp->left = new node(leftData);
+            q.push(temp->left);
+        }
+        cout << "Enter right node for " << temp->data << endl;
+        int RightData;
+        cin >> RightData;
+        if (RightData != -1)
+        {
+            temp->right = new node(RightData);
+            q.push(temp->right);
+        }
+    }
+    return root;
+}
+
 int main()
 {
     node *root = NULL;
-    root = builTree(root);
-    cout << "LevelOrder Travarsal \n";
-    levelOrderTravarsal(root);
+    // root = builTree(root);
 
-    cout << "InOrder Travarsal ";
-    InOrderTraversal(root);
-    cout << "\n";
-    cout << "PreOrder Travarsal ";
-    PreOrderTraversal(root);
-    cout << "\n";
-    cout << "PostOrder Travarsal ";
-    PostOrderTraversal(root);
+    cout << " Build From Level Order " << endl;
+    root = buildFromLevelOrder();
+
+    if (root != NULL)
+    {
+        cout << "Level Order Traversal: \n";
+        levelOrderTravarsal(root);
+        cout << endl;
+
+        // cout << "InOrder Traversal: ";
+        // InOrderTraversal(root);
+        // cout << endl;
+
+        // cout << "PreOrder Traversal: ";
+        // PreOrderTraversal(root);
+        // cout << endl;
+
+        // cout << "PostOrder Traversal: ";
+        // PostOrderTraversal(root);
+        // cout << endl;
+    }
+    else
+    {
+        cout << "Empty tree!" << endl;
+    }
+
+    return 0;
 }
-/*
-1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
-*/
