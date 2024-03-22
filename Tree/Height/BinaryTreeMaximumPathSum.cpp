@@ -24,7 +24,6 @@ public:
         sum = max(sum, lft + rgt + root->val);
         return root->val + max(rgt, lft);
     }
-
     int maxPathSum(TreeNode *root)
     {
         int sum = INT_MIN;
