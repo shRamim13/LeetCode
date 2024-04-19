@@ -26,6 +26,7 @@
     };
 
 ************************************************************/
+
 int findCeil(BinaryTreeNode<int> *node, int x)
 {
     // Write your code here.
