@@ -1,5 +1,4 @@
-#include <iostream>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 
 class node
@@ -16,21 +15,37 @@ public:
     }
 };
 
-node *builTree(node *root)
+node *buildTree()
 {
-    cout << "Enter the data " << endl;
+    cout << "Enter the data (or -1 to stop): ";
     int data;
     cin >> data;
     if (data == -1)
     {
-        return NULL;
+        return nullptr; // Return null if user inputs -1
     }
-    root = new node(data);
-    cout << "Enter data for inserting the left of " << data << endl;
-    root->left = builTree(root->left);
-    cout << "Enter data for inserting the right of " << data << endl;
-    root->right = builTree(root->right);
+
+    // Create new node with the input data
+    node *root = new node(data);
+
+    // Recursively build left and right subtrees
+    cout << "Enter data for the left child of " << data << ": ";
+    root->left = buildTree();
+    cout << "Enter data for the right child of " << data << ": ";
+    root->right = buildTree();
+
     return root;
+}
+
+void deleteTree(node *root)
+{
+    if (root == nullptr)
+    {
+        return;
+    }
+    deleteTree(root->left);
+    deleteTree(root->right);
+    delete root;
 }
 
 void levelOrderTravarsal(node *root)
@@ -136,7 +151,7 @@ node *buildFromLevelOrder()
 
 int main()
 {
-    node *root = NULL;
+    node *root = buildTree();
     // root = builTree(root);
 
     cout << " Build From Level Order " << endl;
@@ -165,5 +180,25 @@ int main()
         cout << "Empty tree!" << endl;
     }
 
+    deleteTree(root);
+
     return 0;
 }
+
+
+                // //     1
+                // //    / \
+                // //   2   3
+                // //  /\   /
+                // // 4 5   6 
+                //         /
+                //         7
+
+
+
+                // //     1
+                // //    / \
+                // //   2   3
+                // //  /\   /\
+                // // 4 5   6 7
+                
