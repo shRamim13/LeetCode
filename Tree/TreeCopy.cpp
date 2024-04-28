@@ -107,6 +107,58 @@ void PostOrderTraversal(node *root, vector<int> &ans)
     ans.push_back(root->data);
 }
 
+int height_or_depth(node *root)
+{
+    if (root == nullptr)
+    {
+        return 0;
+    }
+    int left_height = height_or_depth(root->left);
+    int right_height = height_or_depth(root->right);
+    return 1 + max(left_height, right_height);
+}
+
+// balance binary tree
+int helper_height_or_depth(node *root)
+{
+    if (root == nullptr)
+    {
+        return 0;
+    }
+    int left_height = height_or_depth(root->left);
+    int right_height = height_or_depth(root->right);
+    if (abs(left_height - right_height) > 1)
+        return -1;
+    return 1 + max(left_height, right_height);
+}
+
+bool isTreeBalanced(node *root)
+{
+    if (helper_height_or_depth(root) == -1)
+        return false;
+    return true;
+}
+
+// diameter
+int diameterHelper(node *root, int &diameter)
+{
+    if (root == nullptr)
+    {
+        return 0;
+    }
+    int left_height = diameterHelper(root->left, diameter);
+    int right_height = diameterHelper(root->right, diameter);
+    diameter = max(diameter, left_height + right_height);
+    return 1 + max(left_height, right_height);
+}
+
+int diameterofTree(node *root)
+{
+    int d = 0;
+    diameterHelper(root, d);
+    return d;
+}
+
 int main()
 {
     node *root = buildTree();
@@ -136,14 +188,16 @@ int main()
     //     cout << x << " ";
     // }
 
-    vector<int> v;
-    PostOrderTraversal(root, v);
-    for (auto x : v)
-    {
-        cout << x << " ";
-    }
+    // vector<int> v;
+    // PostOrderTraversal(root, v);
+    // for (auto x : v)
+    // {
+    //     cout << x << " ";
+    // }
+    // cout << "Height of the tree -> " << height_or_depth(root);
 
-
+    // cout << (isTreeBalanced(root) ? "Tree is balanced " : "Tree is not balanced");
+    cout << diameterofTree(root);
 
     deleteTree(root);
     return 0;
