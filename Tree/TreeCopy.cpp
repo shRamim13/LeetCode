@@ -159,6 +159,22 @@ int diameterofTree(node *root)
     return d;
 }
 
+bool hasPathSum(node *root, int targetSum)
+{
+    if (root == nullptr)
+    {
+        return false;
+    }
+    targetSum -= root->data;
+    cout << "Sum " << targetSum << endl;
+    if (targetSum == 0)
+    {
+        return true;
+    }
+    return hasPathSum(root->left, targetSum) ||
+           hasPathSum(root->right, targetSum);
+}
+
 int main()
 {
     node *root = buildTree();
@@ -197,8 +213,15 @@ int main()
     // cout << "Height of the tree -> " << height_or_depth(root);
 
     // cout << (isTreeBalanced(root) ? "Tree is balanced " : "Tree is not balanced");
-    cout << diameterofTree(root);
-
+    // cout << diameterofTree(root);
+    if (hasPathSum(root, 1))
+    {
+        cout << "True";
+    }
+    else
+    {
+        cout << "false";
+        }
     deleteTree(root);
     return 0;
 }
