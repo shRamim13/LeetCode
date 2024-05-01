@@ -1,20 +1,18 @@
 class Solution
 {
 public:
-    int jump(vector<int> &nums)
+    bool canJump(vector<int> &nums)
     {
-        int canExplore = 0;
-        int lastJumpIndex = 0;
-        int jumpCount = 0;
-        for (int i = 0; i < nums.size() - 1; i++)
+
+        int maxDis = 0;
+        for (int i = 0; i < nums.size(); i++)
         {
-            canExplore = max(canExplore, i + nums[i]);
-            if (i == lastJumpIndex)
+            if (maxDis < i)
             {
-                lastJumpIndex = canExplore;
-                jumpCount++;
+                return false;
             }
+            maxDis = max(maxDis, i + nums[i]);
         }
-        return jumpCount;
+        return true;
     }
 };
