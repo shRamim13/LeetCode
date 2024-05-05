@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <climits> // For INT_MAX
 using namespace std;
 
 void swap(int &x, int &y)
@@ -16,6 +17,15 @@ class MaxHeap
 
 public:
     MaxHeap(int capacity);
+    ~MaxHeap(); // Destructor to release allocated memory
+    void insertKey(int k);
+    void increaseKey(int i, int new_val); // Renamed decreaseKey to increaseKey
+    void deleteKey(int i);
+    int extractMax(); // Renamed extractMin to extractMax
+    int getMax()
+    {
+        return heap_size > 0 ? arr[0] : INT_MIN;
+    }
     void MaxHeapify(int i);
     int parent(int i)
     {
@@ -28,16 +38,8 @@ public:
 
     int RightChild(int i)
     {
-        return 2 * i + ;
+        return 2 * i + 2;
     }
-    int extractMin();
-    void decreaseKey(int i, int new_val);
-    void deleteKey(int i);
-    int getMax()
-    {
-        return arr[0];
-    }
-    void insertKey(int i);
 };
 
 MaxHeap::MaxHeap(int cap)
@@ -47,11 +49,16 @@ MaxHeap::MaxHeap(int cap)
     arr = new int[cap];
 }
 
+MaxHeap::~MaxHeap()
+{
+    delete[] arr;
+}
+
 void MaxHeap::insertKey(int k)
 {
     if (heap_size == capacity)
     {
-        cout << "\nOverFlow: Could not insertKey\n";
+        cout << "\nOverflow: Could not insertKey\n";
         return;
     }
     heap_size++;
@@ -64,8 +71,13 @@ void MaxHeap::insertKey(int k)
     }
 }
 
-void MaxHeap::decreaseKey(int i, int new_val)
+void MaxHeap::increaseKey(int i, int new_val)
 {
+    if (new_val < arr[i])
+    {
+        cout << "\nNew value is less than current value: Could not increaseKey\n";
+        return;
+    }
     arr[i] = new_val;
     while (i != 0 && arr[parent(i)] < arr[i])
     {
@@ -74,10 +86,11 @@ void MaxHeap::decreaseKey(int i, int new_val)
     }
 }
 
-int MaxHeap::extractMin()
+int MaxHeap::extractMax()
 {
     if (heap_size <= 0)
     {
+        cout << "\nHeap is empty: Could not extractMax\n";
         return INT_MIN;
     }
     if (heap_size == 1)
@@ -91,10 +104,11 @@ int MaxHeap::extractMin()
     MaxHeapify(0);
     return root;
 }
+
 void MaxHeap::deleteKey(int i)
 {
-    decreaseKey(i, );
-    cout << extractMin() << " is deleted from heap \n";
+    increaseKey(i, INT_MAX); // Changed to increaseKey
+    cout << extractMax() << " is deleted from heap\n";
 }
 
 void MaxHeap::MaxHeapify(int i)
@@ -127,9 +141,9 @@ int main()
     h.insertKey(5);
     h.insertKey(4);
     h.insertKey(45);
-    cout << h.extractMin() << " ";
+    cout << h.extractMax() << " ";
     cout << h.getMax() << " ";
-    h.decreaseKey(2, 1);
+    h.increaseKey(2, 1); // Changed to increaseKey
     cout << h.getMax();
     return 0;
 }
