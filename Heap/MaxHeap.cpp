@@ -30,11 +30,17 @@ public:
     // Extract the root which is the maximum element
     int extractMax();
 
+    // Increase key value of key at index i to new_val
+    void increaseKey(int i, int new_val);
+
     // Get the maximum key (key at root) from max heap
     int getMax() { return harr[0]; }
 
-    // Heap sort function
-    void heapSort();
+    // Delete a key stored at index i
+    void deleteKey(int i);
+
+    // Insert a new key 'k'
+    void insertKey(int k);
 };
 
 // Constructor: Builds a heap from a given array a[] of given size
@@ -45,11 +51,50 @@ MaxHeap::MaxHeap(int cap)
     harr = new int[cap];
 }
 
+// Inserts a new key 'k'
+void MaxHeap::insertKey(int k)
+{
+    if (heap_size == capacity)
+    {
+        cout << "\nOverflow: Could not insertKey\n";
+        return;
+    }
+
+    // First insert the new key at the end
+    heap_size++;
+    int i = heap_size - 1;
+    harr[i] = k;
+
+    // Fix the max heap property if it is violated
+    while (i != 0 && harr[parent(i)] < harr[i])
+    {
+        swap(harr[i], harr[parent(i)]);
+        i = parent(i);
+    }
+}
+
+// Increases value of key at index 'i' to new_val. It is assumed that
+// new_val is greater than harr[i].
+void MaxHeap::increaseKey(int i, int new_val)
+{
+    harr[i] = new_val;
+    while (i != 0 && harr[parent(i)] < harr[i])
+    {
+        swap(harr[i], harr[parent(i)]);
+        i = parent(i);
+    }
+}
+
 // Method to remove maximum element (or root) from max heap
 int MaxHeap::extractMax()
 {
     if (heap_size <= 0)
         return INT_MIN;
+    if (heap_size == 1)
+    {
+        heap_size--;
+        return harr[0];
+    }
 
     // Store the maximum value, and remove it from heap
     int root = harr[0];
@@ -58,6 +103,13 @@ int MaxHeap::extractMax()
     MaxHeapify(0);
 
     return root;
+}
+
+// Deletes key at index i
+void MaxHeap::deleteKey(int i)
+{
+    increaseKey(i, INT_MAX);
+    extractMax();
 }
 
 // A recursive method to heapify a subtree with the root at given index
@@ -78,40 +130,20 @@ void MaxHeap::MaxHeapify(int i)
     }
 }
 
-// Heap Sort function
-void MaxHeap::heapSort()
-{
-    // Build max heap
-    for (int i = heap_size / 2 - 1; i >= 0; i--)
-        MaxHeapify(i);
-
-    // Extract elements from the heap one by one
-    for (int i = heap_size - 1; i > 0; i--)
-    {
-        // Move current root to end
-        swap(harr[0], harr[i]);
-
-        // Call max heapify on the reduced heap
-        MaxHeapify(0);
-    }
-}
-
-// Driver program to test Heap Sort
+// Driver program to test above functions
 int main()
 {
-    int arr[] = {12, 11, 13, 5, 6, 7};
-    int n = sizeof(arr) / sizeof(arr[0]);
-
-    MaxHeap heap(n);
-    for (int i = 0; i < n; i++)
-        heap.insertKey(arr[i]);
-
-    heap.heapSort();
-
-    cout << "Sorted array is \n";
-    for (int i = 0; i < n; i++)
-        cout << arr[i] << " ";
-    cout << endl;
-
+    MaxHeap h(11);
+    h.insertKey(3);
+    h.insertKey(2);
+    h.deleteKey(1);
+    h.insertKey(15);
+    h.insertKey(5);
+    h.insertKey(4);
+    h.insertKey(45);
+    cout << h.extractMax() << " ";
+    cout << h.getMax() << " ";
+    h.increaseKey(2, 1);
+    cout << h.getMax();
     return 0;
 }
