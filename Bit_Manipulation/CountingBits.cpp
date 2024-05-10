@@ -15,7 +15,6 @@ public:
             }
             v[i] = cnt;
         }
-        
         return v;
     }
 };
