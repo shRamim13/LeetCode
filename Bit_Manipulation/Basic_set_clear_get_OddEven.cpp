@@ -3,7 +3,7 @@ using namespace std;
 
 void bitManipulation(int num, int i)
 {
-    // Get the value of the ith bit
+    // Get/check the value of the ith bit
     cout << (num & (1 << i)) << " ";
 
     // Set the ith bit
