@@ -6,6 +6,28 @@ using namespace std;
 class Solution
 {
 
+    // bool bfsCycle(int node, vector<int>& vis, vector<int> adj[]) {
+    //         queue<pair<int, int>> pq;
+    //         pq.push({node, -1});
+    //         vis[node] = 1;
+
+    //         while (!pq.empty()) {
+    //             int nd = pq.front().first;
+    //             int pr = pq.front().second;
+    //             pq.pop();
+
+    //             for (auto x : adj[nd]) {
+    //                 if (vis[x] == 0) {
+    //                     vis[x] = 1;
+    //                     pq.push({x, nd});
+    //                 } else if (x != pr) {
+    //                     return true;
+    //                 }
+    //             }
+    //         }
+    //         return false;
+    //     }
+
 private:
     bool dfsCycle(int node, int parent, vector<int> &vis, vector<int> adj[])
     {
