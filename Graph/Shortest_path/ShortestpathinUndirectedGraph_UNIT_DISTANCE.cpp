@@ -1,36 +1,49 @@
 vector<int> shortestPath(vector<vector<int>> &edges, int N, int M, int src)
 {
-    vector<vector<int>> v(N);
-    for (auto x : edges)
+    // Initialize adjacency list
+    vector<vector<int>> adj(N);
+    for (auto &edge : edges)
     {
-        v[x[0]].push_back(x[1]);
-        v[x[1]].push_back(x[0]);
+        int u = edge[0], v = edge[1];
+        adj[u].push_back(v);
+        adj[v].push_back(u);
     }
 
-    vector<int> dis(N, 1e9);
+    // Initialize distance vector with a large value
+    vector<int> distance(N, 1e9);
+    vector<bool> visited(N, false);
     queue<int> q;
+
+    // BFS initialization
     q.push(src);
-    dis[src] = 0;
+    distance[src] = 0;
+    visited[src] = true;
+
+    // BFS execution
     while (!q.empty())
     {
-        int t = q.front();
+        int node = q.front();
         q.pop();
-        for (auto x : v[t])
+        for (int neighbor : adj[node])
         {
-            if (dis[t] + 1 < dis[x])
+            if (!visited[neighbor])
             {
-                dis[x] = dis[t] + 1;
-                q.push(x);
+                distance[neighbor] = distance[node] + 1;
+                visited[neighbor] = true;
+                q.push(neighbor);
             }
         }
     }
-    vector<int> ans(N, -1);
-    for (int i = 0; i < N; i++)
+
+    // Prepare the answer vector
+    vector<int> result(N, -1);
+    for (int i = 0; i < N; ++i)
     {
-        if (dis[i] != 1e9)
+        if (distance[i] != 1e9)
         {
-            ans[i] = dis[i];
+            result[i] = distance[i];
         }
     }
-    return ans;
+
+    return result;
 }
