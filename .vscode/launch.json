@@ -2,14 +2,19 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "(Windows) Attach",
+      "type": "cppvsdbg",
+      "request": "attach",
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "g:/LeetCode/Graph/Topological_Sort",
-      "program": "g:/LeetCode/Graph/Topological_Sort/build/Debug/outDebug",
+      "cwd": "g:/LeetCode/Graph/Shortest_path",
+      "program": "g:/LeetCode/Graph/Shortest_path/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
