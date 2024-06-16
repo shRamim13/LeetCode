@@ -40,8 +40,7 @@ public:
                     (r - l + 1))
                 {                       // Check if the current window is smaller
                     minLen = r - l + 1; // Update the minimum length
-                    startIdx =
-                        l; // Update the starting index of the minimum window
+                    startIdx = l;       // Update the starting index of the minimum window
                 }
 
                 mp[s[l]]++; // Increase the count in the map
