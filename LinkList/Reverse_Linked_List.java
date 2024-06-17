@@ -9,7 +9,6 @@ class Node<T> {
         this.data=data;
     }
 }
-
 void main(){
     Node<Integer> n1=new Node(10);
     Node<Integer> n1=new Node(20);
