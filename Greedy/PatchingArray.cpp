@@ -8,7 +8,6 @@ public:
         int minpatch = 0;
         int i = 0;
         int sz = nums.size();
-
         while (formedSum < n)
         {
             if (i < sz && nums[i] <= expectedSum)
