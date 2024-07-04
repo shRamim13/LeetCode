@@ -1,38 +1,27 @@
 class Solution
 {
 public:
-    vector<string> ans;
-
-    void _genarate_parenthese(string &s, int first, int second)
+    void solve(int n, string temp, int open, int close, vector<string> &ans)
     {
-        if (first == 0 && second == 0)
+        if (temp.size() == 2 * n)
         {
-            ans.push_back(s);
+            ans.push_back(temp);
             return;
         }
-
-        if (first > 0)
+        if (open < n)
         {
-            s.push_back('(');
-            _genarate_parenthese(s, first - 1, second);
-            s.pop_back();
+            solve(n, temp + '(', open + 1, close, ans);
         }
-
-        if (second > 0)
+        if (close < open)
         {
-            if (second > first)
-            {
-                s.push_back(')');
-                _genarate_parenthese(s, first, second - 1);
-                s.pop_back();
-            }
+            solve(n, temp + ')', open, close + 1, ans);
         }
     }
 
     vector<string> generateParenthesis(int n)
     {
-        string s;
-        _genarate_parenthese(s, n, n);
+        vector<string> ans;
+        solve(n, "", 0, 0, ans);
         return ans;
     }
 };
