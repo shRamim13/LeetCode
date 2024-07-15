@@ -42,7 +42,6 @@ public:
             ans.push_back(v);
             return;
         }
-
         for (int i = 0; i < n; i++)
         {
             if (isValid(row, i, n, v))
