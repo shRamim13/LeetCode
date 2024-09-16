@@ -3,23 +3,37 @@ class Solution
 public:
     vector<vector<int>> merge(vector<vector<int>> &intervals)
     {
+        // Handle empty input
+        if (intervals.empty())
+            return {};
+
         vector<vector<int>> v;
+        // Sort the intervals by their starting values
         sort(intervals.begin(), intervals.end());
-        v.push_back({intervals[0][0], intervals[0][1]});
+
+        // Start by adding the first interval
+        v.push_back(intervals[0]);
+
         for (int i = 1; i < intervals.size(); i++)
         {
-            vector<int> hlp = v.back();
-            if (hlp[1] >= intervals[i][0])
+            // Use a reference to the last merged interval
+            vector<int> &last = v.back();
+
+            // Check if the current interval overlaps with the last merged
+            // interval
+            if (last[1] >= intervals[i][0])
             {
-                hlp[1] = max(hlp[1], intervals[i][1]);
-                v.pop_back();
-                v.push_back(hlp);
+                // Merge the intervals by updating the end of the last merged
+                // interval
+                last[1] = max(last[1], intervals[i][1]);
             }
             else
             {
-                v.push_back({intervals[i][0], intervals[i][1]});
+                // If no overlap, add the current interval to the result
+                v.push_back(intervals[i]);
             }
         }
+
         return v;
     }
 };
