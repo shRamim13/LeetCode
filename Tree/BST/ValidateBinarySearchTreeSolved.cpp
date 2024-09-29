@@ -1,18 +1,23 @@
 class Solution
 {
 public:
-    bool _isValidBST(TreeNode *root, long long x, long long y)
+    bool solve(TreeNode *root, long long mini, long long maxi)
     {
         if (root == nullptr)
+        {
             return true;
-        if (root->val <= x || root->val >= y)
+        }
+
+        if (root->val <= mini || root->val >= maxi)
+        {
             return false;
-        return _isValidBST(root->left, x, root->val) &&
-               _isValidBST(root->right, root->val, y);
+        }
+        return solve(root->left, mini, root->val) &&
+               solve(root->right, root->val, maxi);
     }
 
     bool isValidBST(TreeNode *root)
     {
-        return _isValidBST(root, LLONG_MIN, LLONG_MAX);
+        return solve(root, LLONG_MIN, LLONG_MAX);
     }
 };
