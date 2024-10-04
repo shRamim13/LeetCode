@@ -1,30 +1,24 @@
-class Solution
+Find Minimum in Rotated Sorted Array
+    Solved class Solution
 {
 public:
     int findMin(vector<int> &nums)
     {
-        int mini = INT_MAX;
-        int l = 0;
-        int r = nums.size() - 1;
-        while (l <= r)
+        int lt = 0;
+        int rt = nums.size() - 1;
+        int maxi = INT_MAX;
+        while (lt < rt)
         {
-            int mid = (l + r) / 2;
-            if (nums[l] <= nums[r])
+            int mid = lt + (rt - lt) / 2;
+            if (nums[lt] <= nums[mid] && nums[mid] > nums[rt])
             {
-                mini = min(mini, nums[l]);
-                break;
-            }
-            if (nums[l] <= nums[mid])
-            {
-                mini = min(nums[l], mini);
-                l = mid + 1;
+                lt = mid + 1;
             }
             else
             {
-                mini = min(nums[mid], mini);
-                r = mid - 1;
+                rt = mid;
             }
         }
-        return mini;
+        return nums[lt];
     }
 };
