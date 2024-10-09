@@ -4,10 +4,10 @@ public:
     int hammingWeight(int n)
     {
         int cnt = 0;
-        while (n > 0)
+        while (n)
         {
+            n = n & (n - 1); //  Brian Kernighan's Algorithm
             cnt++;
-            n = n & (n - 1);
         }
         return cnt;
     }
