@@ -32,7 +32,6 @@ public:
                 result = max(result, it.second + 1);
             }
         }
-
         return result;
     }
 };
