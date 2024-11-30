@@ -13,7 +13,6 @@ public:
                 {
                     flowerbed[i] = 1;
                     n--;
-                    i++;
                 }
             }
         }
