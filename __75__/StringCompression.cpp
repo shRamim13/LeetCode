@@ -3,29 +3,29 @@ class Solution
 public:
     int compress(vector<char> &chars)
     {
+        int indx = 0;
         int i = 0;
-        int j = 0;
 
-        int n = chars.size();
-        while (i < n)
+        while (i < chars.size())
         {
             int cnt = 0;
-            char ch = chars[i];
-            while (i < n && chars[i] == ch)
+            char cur_char = chars[i];
+            while (i < chars.size() && chars[i] == cur_char)
             {
                 i++;
                 cnt++;
             }
-            chars[j++] = ch;
+            chars[indx++] = cur_char;
+
             if (cnt > 1)
             {
                 string s = to_string(cnt);
                 for (auto x : s)
                 {
-                    chars[j++] = x;
+                    chars[indx++] = x;
                 }
             }
         }
-        return j;
+        return indx;
     }
 };
