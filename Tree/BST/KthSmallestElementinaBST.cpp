@@ -1,32 +1,26 @@
-
 class Solution
 {
 public:
-    int cnt;
-    int result;
-    void solve(TreeNode *root)
+    int val = -1;
+    void solve(TreeNode *root, int &k)
     {
         if (root == nullptr)
         {
             return;
         }
-
-        solve(root->left);
-        cnt--;
-        if (cnt == 0)
+        solve(root->left, k);
+        k--;
+        if (k == 0)
         {
-            result = root->val;
+            val = root->val;
             return;
         }
-
-        solve(root->right);
+        solve(root->right, k);
     }
-
     int kthSmallest(TreeNode *root, int k)
     {
-        cnt = k;
-        solve(root);
-        return result;
+        solve(root, k);
+        return val;
     }
 };
 // class Solution
