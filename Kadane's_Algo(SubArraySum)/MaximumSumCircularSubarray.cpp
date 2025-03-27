@@ -3,26 +3,36 @@ class Solution
 public:
     int Kadane_Max(vector<int> &nums)
     {
-        int maxi_so_far = nums[0];
-        int maxi_cur = nums[0];
-        for (int i = 1; i < nums.size(); i++)
+        int n = nums.size();
+        int sum = 0;
+        int maxi = INT_MIN;
+        for (int i = 0; i < n; i++)
         {
-            maxi_cur = max(nums[i], maxi_cur + nums[i]);
-            maxi_so_far = max(maxi_so_far, maxi_cur);
+            sum += nums[i];
+            maxi = max(maxi, sum);
+            if (sum < 0)
+            {
+                sum = 0;
+            }
         }
-        return maxi_so_far;
+        return maxi;
     }
 
     int Kadane_Min(vector<int> &nums)
     {
-        int mini_so_far = nums[0];
-        int mini_cur = nums[0];
-        for (int i = 1; i < nums.size(); i++)
+        int n = nums.size();
+        int sum = 0;
+        int mini = INT_MAX;
+        for (int i = 0; i < n; i++)
         {
-            mini_cur = min(nums[i], mini_cur + nums[i]);
-            mini_so_far = min(mini_so_far, mini_cur);
+            sum += nums[i];
+            mini = min(mini, sum);
+            if (sum > 0)
+            {
+                sum = 0;
+            }
         }
-        return mini_so_far;
+        return mini;
     }
 
     int maxSubarraySumCircular(vector<int> &nums)
@@ -31,7 +41,8 @@ public:
         int minSum = Kadane_Min(nums);
         int maxSum = Kadane_Max(nums);
 
-        // If all numbers are negative, return maxSum (single largest element)
+        // If all numbers are negative, return maxSum (single largest
+        // element)
         if (maxSum < 0)
         {
             return maxSum;
