@@ -1,45 +1,54 @@
 class Solution
 {
 public:
+    int rows, cols;
+    vector<pair<int, int>> directions = {
+        {1, 0}, {-1, 0}, {0, 1}, {0, -1}}; // Down, Up, Right, Left
+
+    bool dfs(vector<vector<char>> &board, string &word, int i, int row,
+             int col)
+    {
+        if (i == word.size())
+            return true;
+
+        if (row < 0 || row >= rows || col < 0 || col >= cols ||
+            board[row][col] != word[i])
+            return false;
+
+        char temp = board[row][col];
+        board[row][col] = '#';
+
+        for (auto [dr, dc] : directions)
+        {
+            int newRow = row + dr, newCol = col + dc;
+            if (dfs(board, word, i + 1, newRow, newCol))
+            {
+                return true;
+            }
+        }
+
+        board[row][col] = temp;
+
+        return false;
+    }
+
     bool exist(vector<vector<char>> &board, string word)
     {
-        int rows = board.size();
-        int cols = board[0].size();
+        rows = board.size();
+        cols = board[0].size();
 
-        for (int i = 0; i < rows; ++i)
+        for (int row = 0; row < rows; row++)
         {
-            for (int j = 0; j < cols; ++j)
+            for (int col = 0; col < cols; col++)
             {
-                if (dfs(board, word, i, j, 0) == true)
+                if (board[row][col] == word[0] &&
+                    dfs(board, word, 0, row, col))
                 {
                     return true;
                 }
             }
         }
+
         return false;
-    }
-
-    bool dfs(vector<vector<char>> &board, string &word, int i, int j, int index)
-    {
-        if (index == word.size())
-        {
-            return true;
-        }
-        if (i < 0 || i >= board.size() || j < 0 || j >= board[0].size() || board[i][j] != word[index])
-        {
-            return false;
-        }
-
-        char temp = board[i][j];
-        board[i][j] = '#';
-
-        bool found = dfs(board, word, i + 1, j, index + 1) || // Down
-                     dfs(board, word, i - 1, j, index + 1) || // Up
-                     dfs(board, word, i, j + 1, index + 1) || // Right
-                     dfs(board, word, i, j - 1, index + 1);   // Left
-
-        board[i][j] = temp;
-
-        return found;
     }
 };
