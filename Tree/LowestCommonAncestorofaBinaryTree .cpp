@@ -9,17 +9,10 @@ public:
         }
         TreeNode *ls = lowestCommonAncestor(root->left, p, q);
         TreeNode *rs = lowestCommonAncestor(root->right, p, q);
-        if (ls == nullptr)
-        {
-            return rs;
-        }
-        else if (rs == nullptr)
-        {
-            return ls;
-        }
-        else
+        if (ls && rs)
         {
             return root;
         }
+        return ls ? ls : rs;
     }
 };
